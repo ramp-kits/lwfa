@@ -4,3 +4,4 @@ torchvision
 transformers
 datasets
 albumentations
+ultralytics
