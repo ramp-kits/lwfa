@@ -93,7 +93,7 @@ def checksum_data(private, raise_error=False):
 
         return data_checksum == local_checksum
     else:
-        True
+        return True
 
 
 def download_from_osf(private, username=None, password=None):
