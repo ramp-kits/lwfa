@@ -18,10 +18,11 @@ dependencies:
   - transformers
   - datasets
   - albumentations
+  - ultralytics
+  - opencv
 
   - pip
   - pip:
     - osfclient
     - ramp-workflow
-    - ultralytics
-    - opencv-python
+    
