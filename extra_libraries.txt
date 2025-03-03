@@ -5,3 +5,4 @@ transformers
 datasets
 albumentations
 ultralytics
+opencv-python

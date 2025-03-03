@@ -19,6 +19,7 @@ dependencies:
   - datasets
   - albumentations
   - ultralytics
+  - opencv-python
 
   - pip
   - pip:
