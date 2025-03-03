@@ -23,3 +23,5 @@ dependencies:
   - pip:
     - osfclient
     - ramp-workflow
+    - ultralytics
+    - opencv-python
