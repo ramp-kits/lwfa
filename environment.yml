@@ -18,6 +18,8 @@ dependencies:
   - transformers
   - datasets
   - albumentations
+  - ultralytics
+  - opencv-python
 
   - pip
   - pip:
