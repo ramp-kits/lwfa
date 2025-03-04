@@ -38,5 +38,26 @@ def make_custom_predictions(iou_threshold):
                 filtered_predictions = combined_predictions
 
             return cls(y_pred=np.array(filtered_predictions, dtype=object))
+        
+        @property
+        def valid_indexes(self):
+            """Return valid indexes, handling empty predictions."""
+            try:
+                if len(self.y_pred.shape) > 1:
+                    raise ValueError(
+                        f"Predictions have wrong shape {self.y_pred.shape}. "
+                        "Expected 1D array of lists, got 2D array. "
+                        "Each prediction should be a list of detections."
+                    )
+                
+                # Handle normal case
+                empty = np.empty(len(self.y_pred), dtype=object)
+                for i in range(len(empty)):
+                    empty[i] = []
+                return ~np.array([np.array_equal(p, []) for p in self.y_pred])
+                
+            except Exception as e:
+                print(f"Warning: Error in valid_indexes: {str(e)}. Using empty predictions.")
+                return np.ones(len(self.y_pred), dtype=bool)
 
     return CustomPredictions
