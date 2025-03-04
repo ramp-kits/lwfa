@@ -44,22 +44,18 @@ def make_custom_predictions(iou_threshold):
             """Return valid indexes, handling empty predictions."""
             try:
                 if len(self.y_pred.shape) > 1:
-                    # If shape is (n,0), handle as empty predictions
-                    if self.y_pred.shape[1] == 0:
-                        return np.ones(self.y_pred.shape[0], dtype=bool)
-                    # If shape is (n,1) or any other wrong shape, raise error
-                    else:
-                        raise ValueError(
-                            f"Predictions have wrong shape {self.y_pred.shape}. "
-                            "Expected 1D array of lists, got 2D array. "
-                            "Each prediction should be a list of detections."
-                        )
-                else:
-                    # Handle normal case
-                    empty = np.empty(len(self.y_pred), dtype=object)
-                    for i in range(len(empty)):
-                        empty[i] = []
-                    return ~np.array([np.array_equal(p, []) for p in self.y_pred])
+                    raise ValueError(
+                        f"Predictions have wrong shape {self.y_pred.shape}. "
+                        "Expected 1D array of lists, got 2D array. "
+                        "Each prediction should be a list of detections."
+                    )
+                
+                # Handle normal case
+                empty = np.empty(len(self.y_pred), dtype=object)
+                for i in range(len(empty)):
+                    empty[i] = []
+                return ~np.array([np.array_equal(p, []) for p in self.y_pred])
+                
             except Exception as e:
                 print(f"Warning: Error in valid_indexes: {str(e)}. Using empty predictions.")
                 return np.ones(len(self.y_pred), dtype=bool)
